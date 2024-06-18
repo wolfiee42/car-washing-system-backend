@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to my world!')
 })
 // api endpoints
-app.use('/api/v1', router)
+app.use('/api', router)
 
 
 // error handler
