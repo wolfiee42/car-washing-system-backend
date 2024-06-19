@@ -15,6 +15,18 @@ const createService = catchAsync(async (req: Request, res: Response) => {
 
 })
 
+const getAllService = catchAsync(async (req: Request, res: Response) => {
+
+    const result = await serviceService.getAllService();
+
+    sendResponse(res, {
+        success: true,
+        statusCode: 200,
+        message: "Service retrieved successfully",
+        data: result
+    })
+})
+
 const singleService = catchAsync(async (req: Request, res: Response) => {
 
     const { id } = req.params;
@@ -31,5 +43,6 @@ const singleService = catchAsync(async (req: Request, res: Response) => {
 
 export const serviceController = {
     createService,
-    singleService
+    singleService,
+    getAllService
 }

@@ -12,15 +12,23 @@ const createService = async (payload: TService) => {
     return result;
 }
 
+const getAllService = async () => {
+
+    const result = await serviceModel.find();
+    return result;
+
+}
 
 const singleService = async (id: string) => {
 
     const result = await serviceModel.findById(id);
-    console.log(result);
     return result;
 
 }
+
+
 export const serviceService = {
     createService,
-    singleService
+    singleService,
+    getAllService
 }
