@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
 import { TUser } from "./auth.interface";
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs';
 import configaration from "../../configaration";
+
 const userSchema = new Schema(
     {
         name: {
@@ -43,7 +44,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
 
     const user = this;
-    user.password = await bcrypt.hash(user.password, 10); // have to change this
+    user.password = await bcryptjs.hash(user.password, Number(configaration.salt_round));
     next();
 
 });

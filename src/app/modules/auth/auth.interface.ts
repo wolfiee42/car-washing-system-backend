@@ -8,3 +8,8 @@ export type TUser = {
     role: keyof typeof User_Role;
     address: string;
 }
+
+export type TLogin = {
+    email: string;
+    password: string;
+}
