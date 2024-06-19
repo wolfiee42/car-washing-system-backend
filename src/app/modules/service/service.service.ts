@@ -15,7 +15,7 @@ const createService = async (payload: TService) => {
 
 const getAllService = async () => {
 
-    const result = await serviceModel.find();
+    const result = await serviceModel.find({ isDeleted: false });
     return result;
 
 }
@@ -39,10 +39,22 @@ const updateService = async (id: string, payload: Partial<TService>) => {
 
 }
 
+const deleteService = async (id: string) => {
+
+    const isServiceExist = await serviceModel.findOne({ _id: id, isDeleted: false });
+    if (!isServiceExist) {
+        throw new AppError(404, "Service not found");
+    }
+
+    const result = await serviceModel.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
+    return result;
+}
+
 
 export const serviceService = {
     createService,
     singleService,
     getAllService,
-    updateService
+    updateService,
+    deleteService
 }

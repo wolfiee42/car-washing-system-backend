@@ -17,7 +17,7 @@ route.get('/:id', serviceController.singleService)
 
 route.put('/:id', validateRequest(serviceValidation.updateServiceValidation), auth(User_Role.admin), serviceController.updateService)
 
-
+route.delete('/:id', auth(User_Role.admin), serviceController.deleteService)
 
 
 export const serviceRoutes = route;
