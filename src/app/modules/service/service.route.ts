@@ -8,5 +8,6 @@ import { User_Role } from "../auth/auth.constant";
 const route = Router();
 
 route.post('/', validateRequest(serviceValidation.createServiceValidation), auth(User_Role.admin), serviceController.createService);
+route.get('/:id', serviceController.singleService)
 
 export const serviceRoutes = route;

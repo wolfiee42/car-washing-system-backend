@@ -17,8 +17,7 @@ export const auth = (...requiredRules: (keyof typeof User_Role)[]) => {
         const user = await authModel.findOne({ email });
 
         if (user?.role !== role || !requiredRules.includes(role)) {
-            throw new AppError(401, "You don't have permission to access this resource");
-
+            throw new AppError(401, "You don't have permission to access this resource.");
         }
 
         next();
