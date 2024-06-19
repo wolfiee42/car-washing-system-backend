@@ -15,6 +15,8 @@ route.get('/', serviceController.getAllService)
 
 route.get('/:id', serviceController.singleService)
 
+route.put('/:id', validateRequest(serviceValidation.updateServiceValidation), auth(User_Role.admin), serviceController.updateService)
+
 
 
 

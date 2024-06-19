@@ -41,8 +41,24 @@ const singleService = catchAsync(async (req: Request, res: Response) => {
 
 })
 
+const updateService = catchAsync(async (req: Request, res: Response) => {
+
+    const { id } = req.params;
+    const payload = req.body;
+
+    const result = await serviceService.updateService(id, payload);
+    sendResponse(res, {
+        success: true,
+        statusCode: 200,
+        message: "Service updated successfully",
+        data: result
+    })
+
+})
+
 export const serviceController = {
     createService,
     singleService,
-    getAllService
+    getAllService,
+    updateService
 }

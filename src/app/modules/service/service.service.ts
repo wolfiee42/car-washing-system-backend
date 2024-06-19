@@ -1,3 +1,4 @@
+import AppError from "../../errors/AppError";
 import { serviceModel } from "./service.model";
 import { TService } from "./sevice.interface";
 
@@ -26,9 +27,22 @@ const singleService = async (id: string) => {
 
 }
 
+const updateService = async (id: string, payload: Partial<TService>) => {
+
+    const isServiceExist = await serviceModel.findOne({ _id: id, isDeleted: false });
+    if (!isServiceExist) {
+        throw new AppError(404, "Service not found");
+    }
+
+    const result = await serviceModel.findByIdAndUpdate(id, payload, { new: true });
+    return result;
+
+}
+
 
 export const serviceService = {
     createService,
     singleService,
-    getAllService
+    getAllService,
+    updateService
 }
