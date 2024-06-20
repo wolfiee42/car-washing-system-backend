@@ -3,6 +3,8 @@ import catchAsync from "../../utils/catchAsync";
 import { serviceService } from "./service.service";
 import sendResponse from "../../utils/sendResponse";
 
+
+// service controller
 const createService = catchAsync(async (req: Request, res: Response) => {
 
     const result = await serviceService.createService(req.body);
@@ -70,10 +72,25 @@ const deleteService = catchAsync(async (req: Request, res: Response) => {
 
 })
 
+
+// slot controller
+const createSlot = catchAsync(async (req: Request, res: Response) => {
+
+    const result = await serviceService.createSlot(req.body);
+    sendResponse(res, {
+        success: true,
+        statusCode: 200,
+        message: "Slot created successfully",
+        data: result
+    })
+})
+
+
 export const serviceController = {
     createService,
     singleService,
     getAllService,
     updateService,
-    deleteService
+    deleteService,
+    createSlot
 }
