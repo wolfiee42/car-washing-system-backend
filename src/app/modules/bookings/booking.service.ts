@@ -9,6 +9,7 @@ const createBooking = async (user: TUser, payload: TBooking) => {
     const newPayload = { ...payload, service: service, slot: slot, customer: user };
 
     const result = (await (await (await bookingModel.create(newPayload)).populate("serviceId")).populate("slotId")).populate("customer");
+
     return result;
 
 };
