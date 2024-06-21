@@ -13,6 +13,12 @@ const createBooking = async (user: TUser, payload: TBooking) => {
 
 };
 
+const getallBookings = async () => {
+    const result = await bookingModel.find().populate("serviceId").populate("slotId").populate("customer");
+    return result;
+}
+
 export const bookingService = {
-    createBooking
+    createBooking,
+    getallBookings
 }

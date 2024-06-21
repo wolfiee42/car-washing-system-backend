@@ -8,5 +8,6 @@ import { bookingValidation } from "./booking.validation";
 const route = Router();
 
 route.post('/', validateRequest(bookingValidation.createBookingValidation), auth(User_Role.user), bookingController.createBooking);
+route.get('/', auth(User_Role.admin), bookingController.getallBookings)
 
 export const bookingRoute = route;

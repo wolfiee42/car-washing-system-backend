@@ -6,6 +6,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import configaration from "../../configaration";
 import { authModel } from "../auth/auth.model";
 import { TUser } from "../auth/auth.interface";
+
+
 const createBooking = catchAsync(async (req: Request, res: Response) => {
 
     const token = req.headers.authorization?.split(' ')[1];
@@ -27,6 +29,17 @@ const createBooking = catchAsync(async (req: Request, res: Response) => {
 
 })
 
+const getallBookings = catchAsync(async (req: Request, res: Response) => {
+    const result = await bookingService.getallBookings();
+    sendResponse(res, {
+        success: true,
+        statusCode: 200,
+        message: "All bookings retrieved successfully",
+        data: result
+    })
+})
+
 export const bookingController = {
-    createBooking
+    createBooking,
+    getallBookings
 }
