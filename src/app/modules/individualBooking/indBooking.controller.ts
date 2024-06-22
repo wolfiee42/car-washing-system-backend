@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import catchAsync from "../../utils/catchAsync";
-import { indBookingService } from "./indBooking.service";
 import sendResponse from "../../utils/sendResponse";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import configaration from "../../configaration";
@@ -19,9 +18,6 @@ const getIndividualBooking = catchAsync(async (req: Request, res: Response) => {
     console.log('user', user);
 
     const result = await bookingModel.find({ customer: user?._id }).populate("serviceId").populate("slotId");
-    console.log('result', result);
-
-
 
     sendResponse(res, {
         success: true,

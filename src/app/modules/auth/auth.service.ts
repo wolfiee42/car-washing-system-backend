@@ -12,6 +12,10 @@ const createAdminUser = async (payload: TUser) => {
     }
 
     const result = await authModel.create(payload);
+    const sanitizedUser = { ...result };
+    delete sanitizedUser._doc.password;
+    delete sanitizedUser._doc.__v;
+
     return result;
 
 }
@@ -29,6 +33,11 @@ const login = async (payload: TLogin) => {
     if (!checkPassword) {
         throw new AppError(httpStatus.UNAUTHORIZED, "Invalid password.");
     }
+
+    const displayUser = { ...user };
+
+    delete displayUser._doc.password;
+    delete displayUser._doc.__v;
 
     return user;
 }

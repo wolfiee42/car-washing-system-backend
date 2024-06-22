@@ -16,12 +16,16 @@ const createService = async (payload: TService) => {
     }
 
     const result = await serviceModel.create(payload);
+
+    const sanitizedUser = { ...result };
+    delete sanitizedUser._doc.__v;
+
     return result;
 }
 
 const getAllService = async () => {
 
-    const result = await serviceModel.find({ isDeleted: false });
+    const result = await serviceModel.find({ isDeleted: false }, { __v: 0 });
     return result;
 
 }
@@ -41,6 +45,11 @@ const updateService = async (id: string, payload: Partial<TService>) => {
     }
 
     const result = await serviceModel.findByIdAndUpdate(id, payload, { new: true });
+
+    const sanitizedPayload = { ...result };
+    delete sanitizedPayload._doc.__v;
+
+
     return result;
 
 }
@@ -53,6 +62,10 @@ const deleteService = async (id: string) => {
     }
 
     const result = await serviceModel.findByIdAndUpdate(id, { isDeleted: true }, { new: true });
+
+    const sanitizedPayload = { ...result };
+    delete sanitizedPayload._doc.__v;
+
     return result;
 }
 
@@ -98,6 +111,11 @@ const createSlot = async (payload: TSlot) => {
     }
 
     const result = await slotModel.create(slots);
+
+    // const sanitizedPayload = { ...result };
+
+    // delete sanitizedPayload._doc.__v;
+
 
     return result;
 

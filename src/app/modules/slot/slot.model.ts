@@ -27,7 +27,8 @@ const slotSchema = new Schema<TSlot>(
         }
     },
     {
-        timestamps: true
+        timestamps: true,
+        versionKey: false
     }
 )
 
