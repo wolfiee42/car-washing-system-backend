@@ -101,7 +101,7 @@ const createSlot = async (payload: TSlot) => {
         throw new AppError(httpStatus.NOT_ACCEPTABLE, "Service is deleted");
     }
 
-    let slots = []
+    const slots = []
 
     // a for loop so that, we can create multiple slots and store it in an array.
     for (let i = 0; i < numberOfSlots; i++) {

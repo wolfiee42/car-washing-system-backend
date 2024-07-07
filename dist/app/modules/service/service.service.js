@@ -75,7 +75,7 @@ const createSlot = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (service === null || service === void 0 ? void 0 : service.isDeleted) {
         throw new AppError_1.default(http_status_1.default.NOT_ACCEPTABLE, "Service is deleted");
     }
-    let slots = [];
+    const slots = [];
     // a for loop so that, we can create multiple slots and store it in an array.
     for (let i = 0; i < numberOfSlots; i++) {
         const start = startTime + i;
